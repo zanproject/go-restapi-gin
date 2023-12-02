@@ -1,15 +1,19 @@
 package productcontroller
 
 import (
+	"net/http"
+
 	"github.com/gin-gonic/gin"
 	models "github.com/zanproject/go-restapi-gin/setup"
 )
 
-func Index(*gin.Context) {
+func Index(c *gin.Context) {
 
 	var products []models.Product
 
 	models.DB.Find(&products)
+
+	c.JSON(http.StatusOK, gin.H{"products": products})
 
 }
 
